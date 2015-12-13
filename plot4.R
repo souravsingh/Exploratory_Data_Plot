@@ -1,16 +1,19 @@
 rm(list=ls())
-#reading data into R:
+
+#Reading data into R:
 cons<- read.table("household_power_consumption.txt", sep=";",nrows= 2075260, header=TRUE, quote= "", strip.white=TRUE, stringsAsFactors = FALSE, na.strings= "?")
 
-# Subsetting the full data to obtain the data related to two days: 
+#Subsetting the full data to obtain the data related to the two days: 
 sub<- subset(cons, (cons$Date == "1/2/2007" | cons$Date== "2/2/2007")) 
 
-# Changing the class of Date variable from character to Date: 
+#Changing the class of Date variable from character to Date: 
 sub$Date <- as.Date(sub$Date, format = "%d/%m/%Y")
-# Combining the Date and Time variable and creating a new column in dataset named "DateTime":
+
+#Combining the Date and Time variable and creating a new column in dataset named "DateTime":
 sub$DateTime <- as.POSIXct(paste(sub$Date, sub$Time))
 
-# Creating the plot4:
+#Creating the plot:
+
 png("plot4.png", width = 480, height = 480)
 par(mfcol=c(2,2))
 
